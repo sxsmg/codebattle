@@ -11,7 +11,6 @@ class User(AbstractUser):
     avatar = models.ImageField(default='avatar.png')
 
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -24,11 +23,11 @@ class Event(models.Model):
     registration_deadline = models.DateTimeField(null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
-
+ 
 
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     def __str__(self):
-        
+
         return self.name 
     
 class Submission(models.Model):

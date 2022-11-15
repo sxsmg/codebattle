@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn codebattle.asgi
+web: python manage.py migrate && gunicorn codebattle.wsgi

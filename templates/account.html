@@ -1,18 +1,27 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>My account</h1>
-
     <div>
+    <h1>My account</h1>
+    <a class="btn btn--warning" href="{% url 'edit-account' %}">Edit</a>
+    <a class="btn btn--warning" href="">Reset password</a>
+
+    </div>
+
+    <div class="section">
         <h3>My Events </h3>
         {% for event in user.events.all %}
         <a href="{% url 'event' event.id %}">{{event.name}}</a>
+        {% empty %}
+            <p>You haven't registered for any events</p>
         {% endfor %}
     </div>
-    <div>
+    <div class="section">
         <h3>My Submissions </h3>
         {% for sub in user.submissions.all %}
         <a href="{% url 'update-submission' sub.id %}">{{sub.event.name}}</a>
+         {% empty %}
+            <p>You don't have any submissions</p>
         {% endfor %}
     </div>
 

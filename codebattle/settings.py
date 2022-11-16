@@ -83,18 +83,18 @@ WSGI_APPLICATION = 'codebattle.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-from secrets import ENGINE, NAME, USER, PASSWORD, HOST, PORT
+from secrets import PG_ENGINE, PG_NAME, PG_USER, PG_PASSWORD, PG_HOST, PG_PORT
 
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
      'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railways',
-        'USER': USER,
-        'PASSWORD': PASSWORD,
-        'HOST': HOST,
-        'PORT': '7759',
+        'NAME': os.environ.get('PG_NAME'),
+        'USER': os.environ.get('PG_USER'),
+        'PASSWORD': os.environ.get('PG_PASSWORD'),
+        'HOST': os.environ.get('PG_HOST'),
+        'PORT': os.environ.get('PG_PORT'),
 
     }
 }

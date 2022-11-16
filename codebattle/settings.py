@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -83,10 +83,19 @@ WSGI_APPLICATION = 'codebattle.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+from secrets import ENGINE, NAME, USER, PASSWORD, HOST, PORT
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+     'ENGINE': ENGINE,
+        'NAME': os.environ.get('NAME'),
+        'USER':  os.environ.get('USER'),
+        'PASSWORD':  os.environ.get('PASSWORD'),
+        'HOST':  os.environ.get('HOST'),
+        'PORT':  os.environ.get('PORT'),
+
     }
 }
 
@@ -108,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

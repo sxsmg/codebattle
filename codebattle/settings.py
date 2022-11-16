@@ -89,12 +89,12 @@ DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
-     'ENGINE': ENGINE,
-        'NAME': NAME,
+     'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railways',
         'USER': USER,
         'PASSWORD': PASSWORD,
         'HOST': HOST,
-        'PORT': PORT,
+        'PORT': '7759',
 
     }
 }

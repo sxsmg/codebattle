@@ -66,6 +66,12 @@ nav a{
     padding: 1em;
     border-radius: 5px;
 }
+.user--avatar--lg{
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
 .user--avatar--sm{
     height: 50px;
     width: 50px;

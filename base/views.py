@@ -6,9 +6,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def home_page(request):
+    limit = request.GET.get('limit') 
+    if limit == None:
+        limit = 20
+    limit = int(limit)
     users = User.objects.filter(hackathon_participant=True)
     count = users.count()
-    users = users[0:20]
+    users = users[0:limit]
     events = Event.objects.all() 
     context = {'users':users, 'events':events, 'count':count}
     return render(request, 'home.html', context)

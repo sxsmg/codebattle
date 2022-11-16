@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -90,11 +90,11 @@ DATABASES = {
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': BASE_DIR / 'db.sqlite3',
      'ENGINE': ENGINE,
-        'NAME': os.environ.get('NAME'),
-        'USER':  os.environ.get('USER'),
-        'PASSWORD':  os.environ.get('PASSWORD'),
-        'HOST':  os.environ.get('HOST'),
-        'PORT':  os.environ.get('PORT'),
+        'NAME': NAME,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'PORT': PORT,
 
     }
 }

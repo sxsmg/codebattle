@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import User, Event, Submission
-from .forms import SubmissionForm, CustomUserCreateForm
+from .forms import SubmissionForm, CustomUserCreateForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -73,7 +73,8 @@ def account_page(request):
     return render(request, 'account.html', context)
 
 def edit_account(request):
-    context = {}
+    form = UserForm() 
+    context = {'form': form}
     return render(request, 'user_form.html', context)
 
 

@@ -73,7 +73,14 @@ def account_page(request):
     return render(request, 'account.html', context)
 
 def edit_account(request):
-    form = UserForm() 
+    form = UserForm(instance=request.user) 
+    
+    if request.method == "POST":
+        form = UserForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
+
     context = {'form': form}
     return render(request, 'user_form.html', context)
 

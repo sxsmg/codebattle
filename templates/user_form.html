@@ -5,7 +5,7 @@
     <h1>Edit Account</h1>
 
     <div class="section">
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in form %}
                 <div class="form-field--wrapper">
@@ -15,7 +15,7 @@
                 </div>
             {% endfor %}
                 <div class="form-field--wrapper">
-                    <input type="submit" value="Update Account"/>
+                    <input class="btn btn--primary" type="submit" value="Update Account"/>
                 </div>
         </form>
         

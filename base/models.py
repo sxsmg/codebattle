@@ -2,13 +2,14 @@ from django.db import models
 import uuid 
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
+from django_resized import ResizedImageField
 
 class User(AbstractUser):
     name = models.CharField(max_length=100, null=True)
     email = models.EmailField(unique=True)
     bio = models.TextField(null=True, blank=True)
     hackathon_participant = models.BooleanField(default=True, null=True)
-    avatar = models.ImageField(default='avatar.png')
+    avatar = ResizedImageField(size=[300,300], default='avatar.png')
 
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     USERNAME_FIELD = 'email'

@@ -28,6 +28,17 @@
     color : #fff;
 }
 
+.success{
+    color: green;
+}
+
+.info{
+    color: steelblue;
+}
+
+.error{
+    color: #E55D42;
+}
 .container--main{
     width: 1200px;
     margin: 0 auto;
@@ -97,8 +108,29 @@ nav a{
     display: flex;
     flex-wrap: wrap;
 }
+
+
+.form-field--wrapper{
+    margin-top: 1em;
+    margin-bottom: 1em;
+
+}
+
+input{
+    width: 100%;
+}
+/*Login Registration  */
+.login-register--container{
+    max-width: 600px;
+    margin: 0 auto;
+    border:1px solid;
+    padding: 1em;
+    border-radius: 5px;
+}
 @media (max-width:1200px){
     .container--main{
         width: 100%;
     }
 }
+
+

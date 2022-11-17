@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib import messages 
 # Create your views here.
 
 def home_page(request):
@@ -55,8 +56,9 @@ def login_page(request):
         if user is not None:
             login(request, user)
             return redirect('home')
-
-    context = {'page': page}
+        else:
+            messages.error(request, "Email or password does not exist ")
+            context = {'page': page}
     return render(request, 'login_register.html', context)
 
 def register_page(request):

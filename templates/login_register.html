@@ -15,10 +15,16 @@
 
                     <label>{{field.label}}</label>
                     {{field }}
+                    {% for error in field.errors %}
+                        <p class="error">{{error}}</p>
+                    {% endfor %}
                 </div>
             {% endfor %}
             <input class='btn btn--primary' type='submit' value="Register"/>
-        </form>
+            {% for error in form.non_field_errors %}
+                <p class="error">{{error}}</p>
+            {% endfor %}
+        </form>`
     </div>
    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
     </div>

@@ -55,10 +55,11 @@ def login_page(request):
             )
         if user is not None:
             login(request, user)
+            messages.info(request, "You have successfully logged in")
             return redirect('home')
         else:
             messages.error(request, "Email or password does not exist ")
-            context = {'page': page}
+    context = {'page': page}
     return render(request, 'login_register.html', context)
 
 def register_page(request):
@@ -71,13 +72,16 @@ def register_page(request):
             user.save()
             login(request, user)
             return redirect('home')
-
+        else:
+            messages.error(request, "an error has oourred during registration")
+            
     page = 'register'
     context = {'page': page, 'form':form}
     return render(request, 'login_register.html', context)
 
 def logout_user(request):
     logout(request)
+    messages.info(request, "USER was logged out!")
     return redirect('login')
 
 
@@ -118,6 +122,7 @@ def change_password(request):
             new_pass = make_password(password1)
             request.user.password = new_pass
             request.user.save()
+            messages.success(request, "you have successfully reset your password")
             return redirect('account')
     return render(request, 'change_password.html')
 

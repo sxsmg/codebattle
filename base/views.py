@@ -4,6 +4,7 @@ from .models import User, Event, Submission
 from .forms import SubmissionForm, CustomUserCreateForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 def home_page(request):
     limit = request.GET.get('limit') 
@@ -77,12 +78,14 @@ def account_page(request):
     context = {'user': user}
     return render(request, 'account.html', context)
 
+@login_required(login_url='login')
 def edit_account(request):
     form = UserForm(instance=request.user) 
     
     if request.method == "POST":
         form = UserForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
+            user = form.save(commit=False)
             form.save()
             return redirect('account')
 
@@ -90,7 +93,17 @@ def edit_account(request):
     return render(request, 'user_form.html', context)
 
 
-
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == "POST":
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        if password1 == password2:
+            new_pass = make_password(password1)
+            request.user.password = new_pass
+            request.user.save()
+            return redirect('account')
+    return render(request, 'change_password.html')
 
 @login_required(login_url='login')
 def registration_confirmation(request, pk):

@@ -1,6 +1,15 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>{{user.name}}</h1>
+    
+
+    <div class="section">
+        <img class="user--avatar--lg" src="{{user.avatar.url}}" />
+        <h1>{{user.name}}</h1>
+
+    </div>
+
+    <div class="section">{{user.bio}}</div>
+    
 {% endblock content %}
 

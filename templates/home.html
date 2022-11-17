@@ -13,6 +13,8 @@
                 <h3>{{event.name}}</h3>
                 <p>{{event.participants.all.count}} registered</p>
                 <p>Registration deadline: {{event.registration_deadline}}</p>
+                <p>{{user.name}}</p>
+
             </div>
             {% endfor %}
             </a> 
@@ -26,7 +28,10 @@
             <a href="{% url 'profile' user.id %}">
             <div class="wrapper--user">
                 <img class='user--avatar--sm' src="{{user.avatar.url}}"
-                <h4>{{user.name}}</h4>
+                <h4>{{user.name}}</h4> 
+                {% if user.bio %}
+                <p>{{user.bio | truncatechars:50}}</p>
+                {% endif %}
             </div></a>
             {% endfor %}
     </section>

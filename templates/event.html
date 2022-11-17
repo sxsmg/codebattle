@@ -4,7 +4,7 @@
 
     <h1>{{event.name}}</h1>
 
-    <div id="event--action--wrapper">
+    <div class='section' id="event--action--wrapper">
          {% if registered %}   
               <p>You have already registered for this event</p> 
          {% else %}
@@ -18,19 +18,24 @@
          <a class="btn btn--primary" href="{% url 'project-submission' event.id %}">Submit Project </a>
          {% endif %}
     </div>
+    <div class="section">
+    <p>{{event.description | linebreaks|urlize}}</p>
+    </div>
 
-    <p>{{event.description}}</p>
-
-    <div>
-        <h3>Event Participants </h3>
-       <div>
+ 
+       <div class="users--lists section">
             {% for user in event.participants.all %}
-                <div>
-                     <strong>{{user.name}}</strong>
-                </div>
+               <a href="{% url 'profile' user.id %}">
+                <div class="wrapper--user">
+                    <img class="user--avatar--sm" src="{{user.avatar.url}}" />
+                    <h4>{{user.name}}</h4>
+                     {% if user.bio %}
+                     <p>{{user.bio | truncatechars:50}}</p>
+                     {% endif %}
+                </div> 
+               </a>
             {% endfor %}
        </div>
-    </div>
-{% endblock content %}
+    {% endblock content %}
 
 

@@ -5,7 +5,9 @@ from .forms import SubmissionForm, CustomUserCreateForm, UserForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # Create your views here.
+
 def home_page(request):
     limit = request.GET.get('limit') 
     if limit == None:
@@ -13,9 +15,21 @@ def home_page(request):
     limit = int(limit)
     users = User.objects.filter(hackathon_participant=True)
     count = users.count()
+    
+    page = request.GET.get('page')
+    paginator = Paginator(users, 5)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        users = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        users = paginator.page(page)
+    pages = list(range(1, paginator.num_pages + 1))
     users = users[0:limit]
     events = Event.objects.all() 
-    context = {'users':users, 'events':events, 'count':count}
+    context = {'users':users, 'events':events, 'count':count, 'paginator': paginator, 'pages': pages}
     return render(request, 'home.html', context)
 
 def event_page(request, pk):

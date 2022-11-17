@@ -88,7 +88,10 @@ nav a{
     padding: 1em;
     border-radius: 5px;
 }
-
+.paginator--wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
 /*EVENT PAGE */
 #event--action--wrapper{
     display: flex;

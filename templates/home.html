@@ -23,7 +23,7 @@
 
     <section>
         <h3>Users: {{count}}</h3>
-        <div class="users--lists">
+        <div class="users--lists section">
             {% for user in users %}
             <a href="{% url 'profile' user.id %}">
             <div class="wrapper--user">
@@ -32,7 +32,15 @@
                 {% if user.bio %}
                 <p>{{user.bio | truncatechars:50}}</p>
                 {% endif %}
-            </div></a>
+            </div>
+        </a>
             {% endfor %}
+            </div>
+            <div class="section paginator--wrapper">
+
+                {% for page in pages %}
+                    <a class="btn btn--primary" href="?page={{page}}">{{pages}}</a>
+                {% endfor %}
+            </div>
     </section>
 {% endblock %}
